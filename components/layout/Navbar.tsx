@@ -5,14 +5,12 @@ import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { ModeToggle } from "../ModeToggle";
 
 const navItems = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
   { name: "Contact", href: "/contact" },
   { name: "Blogs", href: "/blogs" },
-  { name: "Dashboard", href: "/dashboard" },
 ];
 
 export default function Navbar() {
@@ -39,7 +37,7 @@ export default function Navbar() {
 
         {/* Right - Auth Buttons (Desktop) */}
         <div className="hidden md:flex items-center gap-3">
-          <ModeToggle />
+          {/* <ModeToggle /> */}
           <Button variant="ghost" asChild>
             <Link href="/login">Login</Link>
           </Button>
@@ -51,7 +49,7 @@ export default function Navbar() {
         {/* Mobile Menu */}
         <div className="md:hidden">
           <Sheet>
-            <ModeToggle />
+            {/* <ModeToggle /> */}
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon">
                 <Menu className="h-6 w-6" />
