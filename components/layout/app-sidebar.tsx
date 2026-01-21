@@ -1,6 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from "react";
 
-import { VersionSwitcher } from "@/components/layout/version-switcher";
 import {
   Sidebar,
   SidebarContent,
@@ -13,53 +13,46 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "@/components/ui/sidebar";
+import { AdminRoutes } from "@/routes/AdminRoutes";
+import { UserRoutes } from "@/routes/UserRoutes";
 import Link from "next/link";
 import { Separator } from "../ui/separator";
 
-// This is sample data.
-const data = {
-  versions: ["1.0.1"],
-  navMain: [
-    {
-      title: "Prisma Blog",
-      items: [
-        {
-          title: "Dashboard",
-          url: "/dashboard",
-          isActive: true,
-        },
-        {
-          title: "Write Blog",
-          url: "/dashboard/write-blog",
-        },
-        {
-          title: "Analytics",
-          url: "/dashboard/analytics",
-        },
-      ],
-    },
-  ],
-};
+export function AppSidebar({
+  user,
+  ...props
+}: { user: string } & React.ComponentProps<typeof Sidebar>) {
+  let routes = [] as any[];
+  switch (user) {
+    case "admin":
+      routes = AdminRoutes;
+      break;
+    case "user":
+      routes = UserRoutes;
+      break;
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+    default:
+      routes = [];
+      break;
+  }
   return (
     <Sidebar {...props}>
       <SidebarHeader>
-        <VersionSwitcher
+        {/* <VersionSwitcher
           versions={data.versions}
           defaultVersion={data.versions[0]}
-        />
+        /> */}
         {/* <SearchForm /> */}
         <Separator />
       </SidebarHeader>
       <SidebarContent>
         {/* We create a SidebarGroup for each parent. */}
-        {data.navMain.map((item) => (
+        {routes.map((item) => (
           <SidebarGroup key={item.title}>
             <SidebarGroupLabel>{item.title}</SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
-                {item.items.map((item) => (
+                {item.items.map((item: any) => (
                   <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton asChild isActive={item.isActive}>
                       <Link href={item.url}>{item.title}</Link>
