@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/sidebar";
 import { AdminRoutes } from "@/routes/AdminRoutes";
 import { UserRoutes } from "@/routes/UserRoutes";
+import { Route } from "@/types/route.types";
 import Link from "next/link";
 import { Separator } from "../ui/separator";
 
@@ -22,7 +23,7 @@ export function AppSidebar({
   user,
   ...props
 }: { user: string } & React.ComponentProps<typeof Sidebar>) {
-  let routes = [] as any[];
+  let routes: Route[] = [];
   switch (user) {
     case "admin":
       routes = AdminRoutes;

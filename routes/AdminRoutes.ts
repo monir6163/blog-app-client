@@ -1,4 +1,6 @@
-export const AdminRoutes = [
+import { Route } from "@/types/route.types";
+
+export const AdminRoutes: Route[] = [
   {
     title: "Admin Dashboard",
     items: [
