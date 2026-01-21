@@ -1,4 +1,3 @@
-import Navbar from "@/components/layout/Navbar";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -36,7 +35,6 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Navbar />
           <NextTopLoader />
           {children}
         </ThemeProvider>
