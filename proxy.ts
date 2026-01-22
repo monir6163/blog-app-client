@@ -1,13 +1,13 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { Roles } from "./contstants/roles";
-import { userServices } from "./services/user.service";
+import { userService } from "./services/user.service";
 
 export default async function proxy(request: NextRequest) {
   let isAuthenticated = false;
   let isAdmin = false;
   const pathname = request.nextUrl.pathname;
-  const { data } = await userServices.getSession();
+  const { data } = await userService.getSession();
   if (data && data.user) {
     isAuthenticated = true;
     isAdmin = data.user.role === Roles.ADMIN;

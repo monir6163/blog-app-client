@@ -2,7 +2,7 @@ import { env } from "@/env";
 import { cookies } from "next/headers";
 
 const AUTH_URL = env.AUTH_URL;
-export const userServices = {
+export const userService = {
   getSession: async function () {
     try {
       const cookieStore = await cookies();
