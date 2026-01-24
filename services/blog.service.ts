@@ -40,4 +40,21 @@ export const blogService = {
       };
     }
   },
+  getBlogPostById: async (id: string) => {
+    try {
+      const res = await fetch(`${API_URL}/api/posts/${id}`);
+      const data = await res.json();
+      return {
+        success: true,
+        data,
+        error: null,
+      };
+    } catch (error: unknown) {
+      return {
+        success: false,
+        data: null,
+        error: { message: (error as Error).message },
+      };
+    }
+  },
 };
