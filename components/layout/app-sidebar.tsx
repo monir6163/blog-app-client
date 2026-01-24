@@ -13,6 +13,7 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "@/components/ui/sidebar";
+import { Roles } from "@/contstants/roles";
 import { AdminRoutes } from "@/routes/AdminRoutes";
 import { UserRoutes } from "@/routes/UserRoutes";
 import { Route } from "@/types/route.types";
@@ -25,10 +26,10 @@ export function AppSidebar({
 }: { user: string } & React.ComponentProps<typeof Sidebar>) {
   let routes: Route[] = [];
   switch (user) {
-    case "admin":
+    case Roles.ADMIN:
       routes = AdminRoutes;
       break;
-    case "user":
+    case Roles.USER:
       routes = UserRoutes;
       break;
 

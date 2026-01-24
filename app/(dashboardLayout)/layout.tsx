@@ -13,20 +13,20 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
+import { Roles } from "@/contstants/roles";
+import { userService } from "@/services/user.service";
 
-export default function DashboardLayout({
+export default async function DashboardLayout({
   admin,
   user,
 }: {
   admin: React.ReactNode;
   user: React.ReactNode;
 }) {
-  const userInfo = {
-    role: "admin", // Change to "user" to test user view
-  };
+  const { data } = await userService.getSession();
   return (
     <SidebarProvider>
-      <AppSidebar user={userInfo.role} />
+      <AppSidebar user={data?.user?.role} />
       <SidebarInset>
         <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
           <SidebarTrigger className="-ml-1" />
@@ -49,7 +49,7 @@ export default function DashboardLayout({
           </Breadcrumb>
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4">
-          {userInfo.role === "admin" ? admin : user}
+          {data?.user?.role === Roles.ADMIN ? admin : user}
         </div>
       </SidebarInset>
     </SidebarProvider>
