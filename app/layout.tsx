@@ -1,3 +1,4 @@
+import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -37,6 +38,7 @@ export default function RootLayout({
         >
           <NextTopLoader />
           {children}
+          <Toaster position="top-right" richColors />
         </ThemeProvider>
       </body>
     </html>

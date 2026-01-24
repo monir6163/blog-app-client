@@ -10,10 +10,12 @@ import {
   FieldSeparator,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { authClient } from "@/lib/auth-client";
 import { cn } from "@/lib/utils";
 import { useForm } from "@tanstack/react-form";
 import Image from "next/image";
 import * as React from "react";
+import { toast } from "sonner";
 import * as z from "zod";
 
 const RegisterFormSchema = z.object({
@@ -33,8 +35,22 @@ export function RegisterForm({
       password: "",
     },
     validators: { onSubmit: RegisterFormSchema },
-    onSubmit: async (values) => {
-      console.log("Form submitted with values:", values);
+    onSubmit: async ({ value }) => {
+      const toastId = toast.loading("Creating your account...");
+      try {
+        const { error } = await authClient.signUp.email(value);
+        if (error) {
+          toast.error(error.message, { id: toastId });
+          return;
+        }
+        toast.success("Account created! Please check your email.", {
+          id: toastId,
+        });
+      } catch (error) {
+        toast.error("An unexpected error occurred. Please try again.", {
+          id: toastId,
+        });
+      }
     },
   });
   return (
