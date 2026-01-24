@@ -10,8 +10,8 @@ export const UserRoutes: Route[] = [
         isActive: true,
       },
       {
-        title: "Write Blog",
-        url: "/dashboard/write-blog",
+        title: "Create Blog",
+        url: "/dashboard/create-blog",
       },
       {
         title: "Analytics",
