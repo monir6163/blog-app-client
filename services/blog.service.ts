@@ -1,5 +1,10 @@
 import { env } from "@/env";
-import { BlogUrlParams, ServiceOptions } from "@/types/blog.types";
+import {
+  BlogUrlParams,
+  CreateBlogPostDTO,
+  ServiceOptions,
+} from "@/types/blog.types";
+import { cookies } from "next/headers";
 
 const API_URL = env.NEXT_PUBLIC_API_URL;
 
@@ -53,6 +58,32 @@ export const blogService = {
         error: null,
       };
     } catch (error: unknown) {
+      return {
+        success: false,
+        data: null,
+        error: { message: (error as Error).message },
+      };
+    }
+  },
+
+  createBlogPost: async (blogData: CreateBlogPostDTO) => {
+    try {
+      const cookieStore = await cookies();
+      const res = await fetch(`${API_URL}/api/posts`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Cookie: cookieStore.toString(),
+        },
+        body: JSON.stringify(blogData),
+      });
+      const data = await res.json();
+      return {
+        success: true,
+        data,
+        error: null,
+      };
+    } catch (error) {
       return {
         success: false,
         data: null,

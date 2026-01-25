@@ -36,7 +36,7 @@ export interface BlogPost {
   thumbnail: string | null;
   isFeatured: boolean;
   status: string;
-  tags: string[];
+  tags?: string[];
   views: number;
   authorId: string;
   created_at: string;
@@ -44,4 +44,13 @@ export interface BlogPost {
   _count: {
     comments: number;
   };
+}
+
+export interface CreateBlogPostDTO {
+  title: string;
+  content: string;
+  tags?: string[];
+  thumbnail?: string | null;
+  isFeatured?: boolean;
+  status?: string;
 }
