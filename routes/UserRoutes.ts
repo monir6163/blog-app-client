@@ -14,6 +14,10 @@ export const UserRoutes: Route[] = [
         url: "/dashboard/create-blog",
       },
       {
+        title: "History Blogs",
+        url: "/dashboard/history-blogs",
+      },
+      {
         title: "Analytics",
         url: "/dashboard/analytics",
       },
