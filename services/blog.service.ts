@@ -25,6 +25,9 @@ export const blogService = {
       if (options?.revalidate !== undefined) {
         config.next = { revalidate: options.revalidate };
       }
+
+      config.next = { ...config.next, tags: ["blog-posts"] };
+
       const res = await fetch(paramsUrl.toString(), config);
       const data = await res.json();
       return {
